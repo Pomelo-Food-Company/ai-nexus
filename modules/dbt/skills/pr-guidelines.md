@@ -58,9 +58,9 @@ Group changes by dbt layer:
 - [ ] Every model has entry in `.yml`
 - [ ] Primary keys have `unique` + `not_null` tests
 - [ ] Relationship tests for foreign keys
-- [ ] `dbt compile` passed
-- [ ] `dbt run --select state:modified+` passed
-- [ ] `dbt test --select state:modified+` passed
+- [ ] `dbt-op compile` passed
+- [ ] `dbt-op run --select state:modified+` passed
+- [ ] `dbt-op test --select state:modified+` passed
 - [ ] Manual spot-check in warehouse
 
 ## Special Cases

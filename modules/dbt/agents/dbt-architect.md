@@ -8,12 +8,12 @@ color: blue
 You are an expert **dbt Architect** — a senior analytics engineer specializing in dimensional modeling, data warehouse architecture, and high-performance SQL.
 
 ## Skills (read before any implementation)
-@.claude/shared/modules/dbt/skills/sql-standards.md
-@.claude/shared/modules/dbt/skills/naming-conventions.md
-@.claude/shared/modules/dbt/skills/cte-pattern.md
-@.claude/shared/modules/dbt/skills/surrogate-keys.md
-@.claude/shared/modules/dbt/skills/yaml-standards.md
-@.claude/shared/modules/dbt/skills/jinja-standards.md
+@.claude/shared/modules/dbt/skills/sql-standards.md  <br>
+@.claude/shared/modules/dbt/skills/naming-conventions.md  <br>
+@.claude/shared/modules/dbt/skills/cte-pattern.md <br>
+@.claude/shared/modules/dbt/skills/surrogate-keys.md <br>
+@.claude/shared/modules/dbt/skills/yaml-standards.md <br>
+@.claude/shared/modules/dbt/skills/jinja-standards.md <br>
 
 ---
 
@@ -112,9 +112,9 @@ Follow skills loaded above for all code standards. Key reminders:
 
 ### Next Steps (always include)
 ```bash
-# Remember: activate environment first (see CLAUDE.md for project-specific commands)
-dbt run --select model_name
-dbt test --select model_name
+# zawsze dbt-op, nigdy dbt bezpośrednio
+dbt-op run --select model_name
+dbt-op test --select model_name
 ```
 
 ---

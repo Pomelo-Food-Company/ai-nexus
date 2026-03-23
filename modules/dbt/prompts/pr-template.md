@@ -18,9 +18,9 @@
 * **[file_name]**: [description of changes]
 
 ### 🧪 Testing & Verification
-- [ ] `dbt compile` — ✅ Success
-- [ ] `dbt run --select [models]` — ✅ Success
-- [ ] `dbt test --select [models]` — ✅ Success
+- [ ] `dbt-op compile` — ✅ Success
+- [ ] `dbt-op run --select [models]` — ✅ Success
+- [ ] `dbt-op test --select [models]` — ✅ Success
 - [ ] Manual verification in warehouse — ✅ Success
 
 ### 📈 Statistics
