@@ -20,10 +20,14 @@ Every dbt model follows this structure — no exceptions.
 with
 
 source_data as (
+
     select * from {{ ref('stg_source__table') }}
+
 ),
 
+-- transformed_data: brief explanation if logic is non-obvious
 transformed_data as (
+
     select
         id,
         field_1,
@@ -34,17 +38,22 @@ transformed_data as (
         end as derived_field,
     from source_data
     where field_1 is not null
+
 ),
 
 final as (
+
     select * from transformed_data
+
 )
 
 select * from final
 ```
 
 ## Rules
-- All `{{ ref() }}` and `{{ source() }}` calls live in their own CTE at the top
+- All `{{ ref() }}` and `{{ source() }}` calls live in their own CTE at the top — **with blank lines inside the parentheses**
 - Never select directly from `ref()` inline — always alias to a CTE first
 - `final` is always the last CTE, always selected from at the bottom
 - Config block only when needed (materialization, tags, etc.)
+- CTEs with non-obvious logic should have a comment above them explaining what they do
+- Logic duplicated across multiple models should be extracted into a shared intermediate model, not copy-pasted

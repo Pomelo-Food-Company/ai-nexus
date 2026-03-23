@@ -64,4 +64,3 @@ union
 - Fields before aggregates / window functions
 - Aggregate as early as possible before joining
 - Consistency over brevity — "NEWLINES ARE CHEAP, BRAIN TIME IS EXPENSIVE"
-- When in doubt: check `_project_docs/style_guide.md` — it's the authority

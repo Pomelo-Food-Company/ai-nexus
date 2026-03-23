@@ -50,8 +50,12 @@ Only include when needed (materialization override, tags, etc.):
 ```sql
 {{
   config(
-    materialized = 'table'
+    materialized = 'table',
+    sort = 'id',
+    dist = 'id'
   )
 }}
 ```
 Marts should always be `materialized = 'table'`.
+
+Model-specific attributes (sort/dist keys, custom materializations) go in the model's config block. Settings that apply to an entire directory go in `dbt_project.yml` — don't repeat them per-model.

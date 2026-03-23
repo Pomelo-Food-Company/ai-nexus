@@ -3,10 +3,15 @@
 ## Models
 | Layer | Pattern | Example |
 |---|---|---|
+| Base | `base__source_object` | `base__stripe_payments` |
 | Staging | `stg_source__table` | `stg_stripe__payments` |
-| Intermediate | `int_entity_verb` | `int_orders_pivoted` |
-| Dimension | `dim_entity` | `dim_customer` |
+| Intermediate | `int_[entity]s_[verb]s` | `int_orders_pivoted` |
+| Dimension | `dim_entity` | `dim_customers` |
 | Fact | `fct_events` | `fct_orders` |
+
+All model names should be **plural** (e.g. `stg_stripe__invoices`, not `stg_stripe__invoice`).
+
+Base models (`base__`) are used only when a source table requires pre-staging cleanup before the standard `stg_` layer.
 
 ## Fields
 - Format: `snake_case`
@@ -15,6 +20,9 @@
 - Timestamps: `event_at` (UTC), `event_at_pt` (other timezone)
 - Booleans: `is_` or `has_` prefix (e.g. `is_active`, `has_discount`)
 - Prices: decimal format (`19.99` not `1999` cents)
+- **Price suffixes**: product/ecommerce prices are implicitly gross — do NOT add `_gross` suffix. Use `_gross` / `_net` only in accounting/financial contexts where the distinction matters (e.g. `invoice_amount_net`, `payment_amount_gross`).
+- Avoid SQL reserved words as column names (e.g. `order`, `date`, `value`, `name`)
+- Use consistent field names across models — e.g. a FK to `customers` is always `customer_id`, never `user_id`
 
 ## Field Ordering (mandatory for dims and facts)
 
