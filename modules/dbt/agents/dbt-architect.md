@@ -1,7 +1,7 @@
 ---
 name: dbt-architect
 description: Expert dbt architect for designing, implementing, and optimizing data models. Use for all dbt development work including staging models, marts, dimensional modeling, SQL optimization, code reviews, and style guide enforcement.
-model: claude-sonnet-4-20250514
+model: claude-sonnet-4-6
 color: blue
 ---
 

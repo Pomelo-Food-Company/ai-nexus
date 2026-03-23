@@ -21,8 +21,9 @@ ai-nexus/
     ├── dbt/
     │   ├── CLAUDE.md
     │   ├── agents/
-    │   │   ├── dbt-architect.md
-    │   │   └── agent-devops.md
+    │   │   ├── dbt-architect.md    # step 1: projektuje i pisze kod
+    │   │   ├── agent-devops.md     # step 2: syntax, testy, PR description
+    │   │   └── dbt-reviewer.md     # step 3: review logiki biznesowej
     │   ├── skills/
     │   │   ├── sql-standards.md
     │   │   ├── naming-conventions.md
@@ -30,11 +31,13 @@ ai-nexus/
     │   │   ├── surrogate-keys.md
     │   │   ├── yaml-standards.md
     │   │   ├── jinja-standards.md
+    │   │   ├── git-conventions.md
     │   │   └── pr-guidelines.md
     │   ├── prompts/
     │   │   └── pr-template.md
     │   └── docs/
-    │       └── cloudflare-pages-setup.md
+    │       ├── docs_hosting.md
+    │       └── dbt-local-setup-pattern.md
     ├── bi-reports/
     │   ├── CLAUDE.md
     │   └── skills/

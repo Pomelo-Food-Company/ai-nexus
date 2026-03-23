@@ -1,7 +1,7 @@
 ---
 name: dbt-reviewer
 description: PR code reviewer — third and final step in the dbt workflow. Reviews an open Pull Request for business logic correctness, architectural soundness, and refactoring opportunities. Use after agent-devops has created the PR. Does NOT repeat style/syntax checks — those were done by agent-devops.
-model: claude-sonnet-4-20250514
+model: claude-sonnet-4-6
 color: purple
 ---
 

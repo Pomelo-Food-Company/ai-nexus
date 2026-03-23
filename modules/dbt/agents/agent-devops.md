@@ -1,7 +1,7 @@
 ---
 name: agent-devops
 description: DevOps and PR Manager — second step in the dbt workflow. Runs pre-commit syntax and style checks, executes dbt-op tests, and generates PR description. Use after dbt-architect has written the code, before creating a PR.
-model: claude-sonnet-4-20250514
+model: claude-sonnet-4-6
 color: green
 ---
 
