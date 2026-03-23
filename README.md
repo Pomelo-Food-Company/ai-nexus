@@ -10,17 +10,31 @@ Działa jako **single source of truth** — poszczególne projekty pobierają z 
 
 ```
 ai-nexus/
-├── core/                   # kontekst wspólny dla wszystkich projektów
-│   ├── CLAUDE.md           # główny kontekst: firma, dane, zasady pracy
-│   ├── agents/             # agenci generyczni
-│   ├── skills/             # skille generyczne
-│   └── prompts/            # szablony promptów
+├── core/                        # kontekst wspólny dla wszystkich projektów
+│   ├── CLAUDE.md                # główny kontekst: firma, dane, zasady pracy
+│   ├── agents/                  # agenci generyczni
+│   ├── skills/
+│   │   └── git-conventions.md
+│   └── prompts/
 │
-└── modules/                # kontekst domenowy — projekt wybiera co potrzebuje
+└── modules/                     # kontekst domenowy — projekt wybiera co potrzebuje
     ├── dbt/
     │   ├── CLAUDE.md
     │   ├── agents/
-    │   └── skills/
+    │   │   ├── dbt-architect.md
+    │   │   └── agent-devops.md
+    │   ├── skills/
+    │   │   ├── sql-standards.md
+    │   │   ├── naming-conventions.md
+    │   │   ├── cte-pattern.md
+    │   │   ├── surrogate-keys.md
+    │   │   ├── yaml-standards.md
+    │   │   ├── jinja-standards.md
+    │   │   └── pr-guidelines.md
+    │   ├── prompts/
+    │   │   └── pr-template.md
+    │   └── docs/
+    │       └── cloudflare-pages-setup.md
     ├── bi-reports/
     │   ├── CLAUDE.md
     │   └── skills/
@@ -119,8 +133,9 @@ Czy Claude potrzebuje tego ZAWSZE, od pierwszego zdania?
 
 - **`core/`** — tylko zmiany które mają sens dla *każdego* projektu
 - **`modules/`** — zmiany domenowe, nie wrzucaj tu nic co jest specyficzne dla jednego projektu
+- **`modules/*/docs/`** — dokumentacja operacyjna (setup, deployment, howto) reużywalna między projektami tej domeny
 - Jeśli coś jest specyficzne dla jednego projektu → należy do `.claude/local/` w tamtym repo, nie tutaj
-- Testuj zmiany lokalnie zanim push do `main` — `main` trafia do wszystkich projektów po sync
+- Testuj zmiany lokalnie zanim pushniesz do `main` — `main` trafia do wszystkich projektów po sync
 
 ---
 
