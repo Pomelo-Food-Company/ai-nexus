@@ -1,0 +1,29 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env / secrets — nigdy nie commituj kluczy API ani danych firmowych
+.env
+.env.*
+*.key
+secrets/
+
+# Testy lokalne i drafty
+scratch/
+drafts/
+_wip/
+*.draft.md
+
+# Node (jeśli kiedyś dodasz tooling)
+node_modules/
+
+# Python (jeśli kiedyś dodasz skrypty)
+__pycache__/
+*.pyc
+.venv/
