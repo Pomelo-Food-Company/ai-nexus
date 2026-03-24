@@ -23,8 +23,6 @@ Required for all dimension and fact models.
 ]) }} as order_item_sk,
 ```
 
-Always `cast` to string before passing to `generate_surrogate_key`.
-
 ## Surrogate FK References with Defaults
 
 When joining to a dimension, always use `coalesce` to handle missing rows:
