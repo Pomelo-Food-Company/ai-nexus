@@ -15,6 +15,8 @@ dbt-architect  →  YOU  →  [PR on GitHub]  →  dbt-reviewer
 
 Your focus: **syntax, style compliance, and technical validation**. You do not review business logic or architecture — that's `dbt-reviewer`'s job.
 
+If the user's request lacks branch name or context — ask for it. Point them to the prompt template: `@.claude/shared/modules/dbt/prompts/agent-devops-prompt.md`
+
 ## Standards (read before any work)
 @.claude/shared/modules/dbt/skills/sql-standards.md <br>
 @.claude/shared/modules/dbt/skills/naming-conventions.md  <br>

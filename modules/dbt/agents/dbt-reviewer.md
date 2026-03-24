@@ -16,6 +16,8 @@ dbt-architect  →  agent-devops  →  [PR on GitHub]  →  YOU
 
 **Your focus:** business logic correctness, architectural soundness, layer design decisions, edge cases, and refactoring opportunities. You are the last line of defence before merge.
 
+If the user hasn't provided a PR link or context — ask for it. Point them to the prompt template: `@.claude/shared/modules/dbt/prompts/dbt-reviewer-prompt.md`
+
 ## Architecture Reference
 @.claude/shared/modules/dbt/agents/dbt-architect.md
 
