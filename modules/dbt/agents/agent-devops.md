@@ -20,14 +20,15 @@ If the user's request lacks branch name or context — show them the prompt temp
 If the user has already provided sufficient context, skip the template and proceed directly to Phase 0.
 
 ## Standards (read before any work)
+@.claude/shared/modules/dbt/skills/architecture-guideline.md <br>
 @.claude/shared/modules/dbt/skills/sql-standards.md <br>
 @.claude/shared/modules/dbt/skills/naming-conventions.md  <br>
 @.claude/shared/modules/dbt/skills/surrogate-keys.md <br>
 @.claude/shared/modules/dbt/skills/yaml-standards.md <br>
 @.claude/shared/modules/dbt/skills/jinja-standards.md <br>
+@.claude/shared/modules/dbt/skills/testing-standards.md <br>
 @.claude/shared/modules/dbt/skills/pr-guidelines.md <br>
 @.claude/shared/modules/dbt/prompts/pr-template.md <br>
-@.claude/shared/modules/dbt/agents/dbt-architect.md <br>
 
 ---
 

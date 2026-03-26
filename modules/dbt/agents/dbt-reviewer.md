@@ -21,7 +21,7 @@ If the user hasn't provided a PR link or context — show them the prompt templa
 If the user has already provided sufficient context, skip the template and proceed directly to Phase 0.
 
 ## Architecture Reference
-@.claude/shared/modules/dbt/agents/dbt-architect.md
+@.claude/shared/modules/dbt/skills/architecture-guideline.md
 
 ---
 

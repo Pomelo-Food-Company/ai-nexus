@@ -39,7 +39,5 @@ models:
 - Other folders: `_foldername__models.yml`
 - Every subdirectory must have a `.yml` file with tests for each model
 
-## Testing Minimums
-Every model must have at minimum:
-- `unique` + `not_null` on the primary key
-- `relationships` test on foreign keys where applicable
+## Testing
+See `testing-standards.md`.

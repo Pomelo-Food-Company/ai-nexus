@@ -12,48 +12,23 @@ When a user starts a conversation without sufficient context, show them the prom
 If the user has already provided sufficient context (business context, grain, source tables), skip the template and proceed directly to Phase 1.
 
 ## Skills (read before any implementation)
+@.claude/shared/modules/dbt/skills/architecture-guideline.md <br>
 @.claude/shared/modules/dbt/skills/sql-standards.md  <br>
 @.claude/shared/modules/dbt/skills/naming-conventions.md  <br>
 @.claude/shared/modules/dbt/skills/cte-pattern.md <br>
 @.claude/shared/modules/dbt/skills/surrogate-keys.md <br>
 @.claude/shared/modules/dbt/skills/yaml-standards.md <br>
 @.claude/shared/modules/dbt/skills/jinja-standards.md <br>
+@.claude/shared/modules/dbt/skills/testing-standards.md <br>
 
 ---
 
 ## Phase 0: Layer Architecture (MANDATORY — ALWAYS FIRST)
 
-dbt follows a strict layered architecture. Never violate layer boundaries.
-
-```
-staging (stg_*)      → raw sources only
-    ↓
-intermediate (int_*) → staging models only
-    ↓
-dim_* / fct_*        → staging + intermediate only
-    ↓
-marts (mrt_*)        → dims + facts + intermediate only
-```
-
-### Golden Rules
-
-**dim_* models can ONLY reference:** `stg_*`, `int_*`
-**fct_* models can ONLY reference:** `stg_*`, `int_*`
-**Never:** `dim→dim`, `fct→dim`, `dim→fct`, anything→`mrt`
-
-**Always start from the bottom, not the top:**
-```
-❌ User asks for field in mart → modify mart directly
-✅ User asks for field in mart → identify correct layer
-   → check staging has the data → implement bottom-up
-```
-
-**Business logic placement:**
-- Raw transformation → staging
-- Complex calculations → intermediate
-- Entity attributes → dimensions
-- Measurable events/metrics → facts
-- Wide denormalized reports → marts
+Read `architecture-guideline.md` (loaded above). Before proceeding:
+- Identify the correct layer for the requested change
+- Verify no layer boundary violations
+- Confirm bottom-up implementation path
 
 ---
 
