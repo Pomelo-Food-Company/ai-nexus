@@ -17,7 +17,11 @@ Base models (`base__`) are used only when a source table requires pre-staging cl
 - Format: `snake_case`
 - Language: business terminology (not source system names)
 - Primary keys: `entity_id` (e.g. `customer_id`, `order_id`)
-- Timestamps: `event_at` (UTC), `event_at_pt` (other timezone)
+- Timestamps: use past-tense action verb as prefix — `{action_event_name}_at/date/time`:
+  - `{action}_at` — full datetime, UTC (e.g. `delivered_at`, `purchased_at`)
+  - `{action}_date` — date only, YYYY-MM-DD (e.g. `delivered_date`, `purchased_date`)
+  - `{action}_time` — time only, HH:MM (e.g. `delivered_time`, `purchased_time`)
+- If the action verb is not obvious from context — ask the user before naming the column
 - Booleans: `is_` or `has_` prefix (e.g. `is_active`, `has_discount`)
 - Prices: decimal format (`19.99` not `1999` cents)
 - **Price suffixes**: product/ecommerce prices are implicitly gross — do NOT add `_gross` suffix. Use `_gross` / `_net` only in accounting/financial contexts where the distinction matters (e.g. `invoice_amount_net`, `payment_amount_gross`).

@@ -94,54 +94,15 @@ cluster_by = ['customer_id', 'brand_id']
 
 ## Testowanie modeli incremental
 
-### Problem
+Zobacz `testing-standards.md` — sekcja "Incremental models".
 
-`dbt test` sprawdza aktualny stan tabeli, nie logikę incrementalną. Musisz testować osobno.
-
-### Testy obowiązkowe
-
-```yaml
-models:
-  - name: fct_orders
-    columns:
-      - name: order_sk
-        tests:
-          - unique          # wykryje duplikaty po merge
-          - not_null
-      - name: event_date
-        tests:
-          - not_null
-          - dbt_utils.accepted_range:
-              min_value: "'2020-01-01'"
-              max_value: "current_date()"
-```
-
-### Weryfikacja po incremental run
-
-```bash
-# 1. Uruchom tylko model
-dbt-op run --select fct_orders
-
-# 2. Sprawdź testy
-dbt-op test --select fct_orders
-
-# 3. Spot-check: czy liczba wierszy rośnie monotonicznie?
-# (zapytanie do BigQuery bezpośrednio)
+Spot-check po run: czy liczba wierszy rośnie monotonicznie?
+```sql
 select event_date, count(*) as rows
 from {{ ref('fct_orders') }}
 group by 1
 order by 1 desc
 limit 7
-```
-
-### Test duplikatów po late-arriving data
-
-```sql
--- Uruchom po każdym incremental run na prod
-select event_sk, count(*) as cnt
-from fct_orders
-group by 1
-having cnt > 1
 ```
 
 ---

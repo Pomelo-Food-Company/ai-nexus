@@ -46,3 +46,5 @@ When creating a new model: @.claude/shared/modules/dbt/skills/cte-pattern.md <br
 When working with dims/facts: @.claude/shared/modules/dbt/skills/surrogate-keys.md <br>
 When writing YAML: @.claude/shared/modules/dbt/skills/yaml-standards.md <br>
 When writing Jinja: @.claude/shared/modules/dbt/skills/jinja-standards.md <br>
+When designing or reviewing architecture: @.claude/shared/modules/dbt/skills/architecture-guideline.md <br>
+When writing or reviewing tests: @.claude/shared/modules/dbt/skills/testing-standards.md <br>
