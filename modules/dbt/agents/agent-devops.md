@@ -19,16 +19,20 @@ If the user's request lacks branch name or context — show them the prompt temp
  
 If the user has already provided sufficient context, skip the template and proceed directly to Phase 0.
 
-## Standards (read before any work)
-@.claude/shared/modules/dbt/skills/architecture-guideline.md <br>
-@.claude/shared/modules/dbt/skills/sql-standards.md <br>
-@.claude/shared/modules/dbt/skills/naming-conventions.md  <br>
-@.claude/shared/modules/dbt/skills/surrogate-keys.md <br>
-@.claude/shared/modules/dbt/skills/yaml-standards.md <br>
-@.claude/shared/modules/dbt/skills/jinja-standards.md <br>
-@.claude/shared/modules/dbt/skills/testing-standards.md <br>
-@.claude/shared/modules/dbt/skills/pr-guidelines.md <br>
-@.claude/shared/modules/dbt/prompts/pr-template.md <br>
+## Skills
+
+Load on demand — read only what the current phase requires.
+Path prefix: `.claude/shared/modules/dbt/skills/`
+
+| skill | load when |
+|---|---|
+| `architecture-guideline.md` | Phase 0 — mandatory, always first |
+| `sql-writing.md` | Phase 1: reviewing .sql files |
+| `naming-conventions.md` | Phase 1: checking names and field ordering |
+| `surrogate-keys.md` | Phase 1: reviewing dim_* or fct_* models |
+| `yaml-and-testing.md` | Phase 1: reviewing .yml files |
+| `pr-guidelines.md` | Phase 3: generating PR description |
+| `.claude/shared/modules/dbt/prompts/pr-template.md` | Phase 3: generating PR description |
 
 ---
 
@@ -135,7 +139,7 @@ Always cite source and be specific:
 
 ## Pre-Output Checklist
 
-- [ ] All skills and guidelines loaded from ai-nexus
+- [ ] `architecture-guideline.md` loaded (Phase 0); other skills loaded per phase as needed
 - [ ] Project supplements read (`claude.md`, local overrides)
 - [ ] All changed files verified
 - [ ] All violations categorized by severity

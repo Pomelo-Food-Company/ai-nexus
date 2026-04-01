@@ -1,3 +1,9 @@
+---
+name: incremental-models
+description: When to use incremental vs table, merge strategy on BigQuery, incremental filter, partition_by/cluster_by, backfill strategy
+when_to_use: Creating or modifying a fct_* model with high data volume (>0.3 MB/day)
+---
+
 # Incremental Models — BigQuery
 
 ## Kiedy stosować incremental vs table

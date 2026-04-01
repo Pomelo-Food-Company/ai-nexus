@@ -1,3 +1,9 @@
+---
+name: architecture-guideline
+description: Layer boundaries, golden reference table (what each layer can/cannot reference), business logic placement, materialization defaults
+when_to_use: Every task — load first before any design or implementation work
+---
+
 # dbt Architecture Guideline
 
 ## Layer Architecture

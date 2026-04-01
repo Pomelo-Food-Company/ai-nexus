@@ -1,6 +1,56 @@
-# Testing Standards — dbt
+---
+name: yaml-and-testing
+description: YAML documentation structure, file naming, required tests per layer, source freshness, singular tests
+when_to_use: Writing or reviewing .yml files, adding tests, documenting models
+---
 
-## Required tests per layer
+# YAML & Testing Standards
+
+## YAML Formatting
+
+- Indentation: **2 spaces**
+- List items should be indented
+- New line to separate list items that are dictionaries
+- Line limit: **80 characters**
+
+## Model Documentation Template
+
+```yaml
+version: 2
+
+models:
+  - name: dim_customers
+    description: "One row per customer"
+    columns:
+      - name: customer_sk
+        description: "Surrogate key"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: "Natural primary key from source"
+        data_tests:
+          - not_null
+
+      - name: email
+        description: "Customer email address"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_source__users')
+              field: email
+```
+
+## File Naming
+
+- Staging: `_sourcename__sources.yml` + `_sourcename__models.yml`
+- Other folders: `_foldername__models.yml`
+- Every subdirectory must have a `.yml` file with tests for each model
+
+---
+
+## Required Tests Per Layer
 
 | Layer | Minimum required |
 |---|---|
@@ -10,13 +60,13 @@
 | `fct_*` | `unique` + `not_null` on surrogate PK; `relationships` on key FKs; date range check on date column |
 | `mrt_*` | `unique` + `not_null` on PK |
 
-## Standard YAML examples
+## Standard YAML Examples
 
 ### Primary key
 ```yaml
 - name: order_sk
   description: "Surrogate primary key"
-  tests:
+  data_tests:
     - unique
     - not_null
 ```
@@ -25,7 +75,7 @@
 ```yaml
 - name: customer_sk
   description: "FK to dim_customers"
-  tests:
+  data_tests:
     - not_null
     - relationships:
         to: ref('dim_customers')
@@ -35,7 +85,7 @@
 ### Date range (fact tables)
 ```yaml
 - name: event_date
-  tests:
+  data_tests:
     - not_null
     - dbt_utils.accepted_range:
         min_value: "'2020-01-01'"
@@ -45,16 +95,18 @@
 ### Accepted values (enum columns)
 ```yaml
 - name: order_status
-  tests:
+  data_tests:
     - accepted_values:
         values: ['pending', 'processing', 'completed', 'cancelled']
 ```
 
 Use for any column with a fixed set of expected values (`status`, `type`, `channel`, etc.).
 
-## Source freshness
+---
 
-Configure in `_sourcename__sources.yml` for every source table that feeds staging models:
+## Source Freshness
+
+Configure in `_sourcename__sources.yml` for every source table:
 
 ```yaml
 version: 2
@@ -71,31 +123,28 @@ sources:
     tables:
       - name: orders
       - name: payments
-        freshness:                              # override per table if needed
+        freshness:
           warn_after: {count: 1, period: hour}
           error_after: {count: 6, period: hour}
 ```
 
-Run freshness check:
 ```bash
 dbt-op source freshness
-dbt-op source freshness --select source:stripe  # specific source
+dbt-op source freshness --select source:stripe
 ```
 
 **Rules:**
-- Every source table must have `loaded_at_field` defined — use `_fivetran_synced` or equivalent ingestion timestamp
-- Set thresholds based on source SLA, not gut feeling — check with data engineering how often the source syncs
+- Every source table must have `loaded_at_field` defined
 - `warn_after` < `error_after` always
-- Freshness failures block downstream `stg_*` models from being considered fresh
 
-## Singular tests
+---
+
+## Singular Tests
 
 For complex business logic that can't be expressed with schema tests — put SQL in `tests/` folder:
 
 ```sql
 -- tests/assert_fct_orders_no_negative_amounts.sql
--- Every order amount must be non-negative
-
 select order_id
 from {{ ref('fct_orders') }}
 where total_amount < 0
@@ -103,14 +152,16 @@ where total_amount < 0
 
 The test passes when the query returns **zero rows**.
 
-Use singular tests when:
-- Validating cross-model business rules (e.g. every order in fct must exist in dim_customers)
-- Checking aggregated invariants (e.g. total revenue can't drop more than 50% day-over-day)
+Use when:
+- Validating cross-model business rules
+- Checking aggregated invariants
 - Logic is too complex for a schema test
 
-## Incremental models
+---
 
-`dbt test` checks current table state — not incremental logic. Always test separately after each run.
+## Incremental Model Tests
+
+`dbt test` checks current table state — not incremental logic. Always test separately after each run:
 
 ```bash
 dbt-op run --select fct_orders
@@ -125,10 +176,12 @@ group by 1
 having cnt > 1
 ```
 
-## Running tests
+---
+
+## Running Tests
 
 ```bash
-# All modified models and their downstream dependencies
+# All modified models and downstream
 dbt-op test --select state:modified+
 
 # Specific model

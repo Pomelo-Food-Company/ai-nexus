@@ -1,3 +1,9 @@
+---
+name: pr-guidelines
+description: PR title format, emoji conventions, change categorization by layer, style and testing checklists, special cases
+when_to_use: Generating or reviewing a PR description
+---
+
 # PR Guidelines — dbt Projects
 
 ## Structure

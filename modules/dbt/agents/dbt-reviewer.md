@@ -20,8 +20,18 @@ If the user hasn't provided a PR link or context — show them the prompt templa
  
 If the user has already provided sufficient context, skip the template and proceed directly to Phase 0.
 
-## Architecture Reference
-@.claude/shared/modules/dbt/skills/architecture-guideline.md
+## Skills
+
+Load on demand — read only what the current phase requires.
+Path prefix: `.claude/shared/modules/dbt/skills/`
+
+| skill | load when |
+|---|---|
+| `architecture-guideline.md` | Phase 0 — mandatory, always first |
+| `naming-conventions.md` | Phase 1: reviewing model/field names |
+| `sql-writing.md` | Phase 1: reviewing SQL logic or CTE structure |
+| `surrogate-keys.md` | Phase 1: reviewing dim_* or fct_* grain/keys |
+| `yaml-and-testing.md` | Phase 1: reviewing .yml descriptions or tests |
 
 ---
 

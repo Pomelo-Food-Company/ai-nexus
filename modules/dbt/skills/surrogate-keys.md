@@ -1,3 +1,9 @@
+---
+name: surrogate-keys
+description: Surrogate key generation with dbt_utils, coalesce defaults for FK references, full dim/fact example
+when_to_use: Creating or reviewing dim_* or fct_* models
+---
+
 # Surrogate Keys
 
 Required for all dimension and fact models.

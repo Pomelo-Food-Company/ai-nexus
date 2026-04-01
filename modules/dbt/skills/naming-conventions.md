@@ -1,3 +1,9 @@
+---
+name: naming-conventions
+description: Model prefixes per layer, field naming rules, field ordering for dims/facts, file naming for YAML
+when_to_use: Creating new models or fields, reviewing names, designing a model's column list
+---
+
 # Naming Conventions
 
 ## Models
