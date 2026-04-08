@@ -11,49 +11,28 @@ When a user starts a conversation without sufficient context, show them the prom
  
 If the user has already provided sufficient context (business context, grain, source tables), skip the template and proceed directly to Phase 1.
 
-## Skills (read before any implementation)
-@.claude/shared/modules/dbt/skills/sql-standards.md  <br>
-@.claude/shared/modules/dbt/skills/naming-conventions.md  <br>
-@.claude/shared/modules/dbt/skills/cte-pattern.md <br>
-@.claude/shared/modules/dbt/skills/surrogate-keys.md <br>
-@.claude/shared/modules/dbt/skills/yaml-standards.md <br>
-@.claude/shared/modules/dbt/skills/jinja-standards.md <br>
+## Skills
+
+Load on demand — read only what the current phase requires.
+Path prefix: `.claude/shared/modules/dbt/skills/`
+
+| skill | load when |
+|---|---|
+| `architecture-guideline.md` | Phase 0 — mandatory, always first |
+| `naming-conventions.md` | Phase 2–3: designing or naming new models/fields |
+| `sql-writing.md` | Phase 3: writing any .sql model |
+| `surrogate-keys.md` | Phase 3: dim_* or fct_* models |
+| `yaml-and-testing.md` | Phase 3: writing .yml documentation |
+| `incremental-models.md` | Phase 3: fct_* with high data volume |
 
 ---
 
 ## Phase 0: Layer Architecture (MANDATORY — ALWAYS FIRST)
 
-dbt follows a strict layered architecture. Never violate layer boundaries.
-
-```
-staging (stg_*)      → raw sources only
-    ↓
-intermediate (int_*) → staging models only
-    ↓
-dim_* / fct_*        → staging + intermediate only
-    ↓
-marts (mrt_*)        → dims + facts + intermediate only
-```
-
-### Golden Rules
-
-**dim_* models can ONLY reference:** `stg_*`, `int_*`
-**fct_* models can ONLY reference:** `stg_*`, `int_*`
-**Never:** `dim→dim`, `fct→dim`, `dim→fct`, anything→`mrt`
-
-**Always start from the bottom, not the top:**
-```
-❌ User asks for field in mart → modify mart directly
-✅ User asks for field in mart → identify correct layer
-   → check staging has the data → implement bottom-up
-```
-
-**Business logic placement:**
-- Raw transformation → staging
-- Complex calculations → intermediate
-- Entity attributes → dimensions
-- Measurable events/metrics → facts
-- Wide denormalized reports → marts
+Read `architecture-guideline.md` now. Before proceeding:
+- Identify the correct layer for the requested change
+- Verify no layer boundary violations
+- Confirm bottom-up implementation path
 
 ---
 
@@ -109,10 +88,12 @@ New models needed: int_campaigns__daily_metrics
 
 ## Phase 3: Implementation (only after approval)
 
-Follow skills loaded above for all code standards. Key reminders:
-- Surrogate keys: `surrogate-keys.md`
-- JOIN formatting: `sql-standards.md`
-- YAML documentation: `yaml-standards.md`
+Before writing code, load:
+- `sql-writing.md` — CTE structure, formatting, Jinja
+- `naming-conventions.md` — field ordering, naming rules
+- `surrogate-keys.md` — if creating dim_* or fct_*
+- `yaml-and-testing.md` — for .yml documentation
+- `incremental-models.md` — if fct_* with high data volume
 
 ### Next Steps (always include)
 ```bash
@@ -158,7 +139,7 @@ When requirements conflict with style guide — flag it, explain the tradeoff, a
 ## Self-Verification Checklist
 
 **Context:**
-- [ ] Skills loaded from ai-nexus
+- [ ] `architecture-guideline.md` loaded (Phase 0)
 - [ ] Read CLAUDE.md (and `_project_docs/style_guide.md` if exists)
 - [ ] Identified correct layer for implementation
 - [ ] Reviewed existing models and dependencies

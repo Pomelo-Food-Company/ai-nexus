@@ -39,10 +39,17 @@ dbt test
 - Every model needs primary key tests (unique, not_null)
 - Business terminology over technical source names
 
-## Skills
-Before writing SQL: @.claude/shared/modules/dbt/skills/sql-standards.md <br>
-Before naming anything: @.claude/shared/modules/dbt/skills/naming-conventions.md <br>
-When creating a new model: @.claude/shared/modules/dbt/skills/cte-pattern.md <br>
-When working with dims/facts: @.claude/shared/modules/dbt/skills/surrogate-keys.md <br>
-When writing YAML: @.claude/shared/modules/dbt/skills/yaml-standards.md <br>
-When writing Jinja: @.claude/shared/modules/dbt/skills/jinja-standards.md <br>
+## Available Skills
+
+Load skill files on demand — read only what the current task requires.
+Path prefix: `.claude/shared/modules/dbt/skills/`
+
+| skill | description | when to load |
+|---|---|---|
+| `architecture-guideline.md` | Layer boundaries, golden reference table, materialization defaults | Every task — load first |
+| `naming-conventions.md` | Model prefixes per layer, field naming, field ordering for dims/facts | Creating new models or fields |
+| `sql-writing.md` | CTE structure, SQL formatting, Jinja conventions, config blocks | Writing or reviewing any .sql model |
+| `surrogate-keys.md` | SK generation with dbt_utils, coalesce defaults for FK references | Creating or reviewing dim_* / fct_* |
+| `yaml-and-testing.md` | YAML structure, required tests per layer, source freshness, singular tests | Writing or reviewing .yml files / tests |
+| `incremental-models.md` | merge strategy on BigQuery, partition_by, backfill | fct_* models with high data volume |
+| `pr-guidelines.md` | PR title format, change categorization, checklists | Generating a PR description |
